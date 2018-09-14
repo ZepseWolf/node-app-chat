@@ -4,13 +4,21 @@ socket.on('disconnect',function(){
   console.log('Server down');
 });
 socket.on('connect',function(){
+  var param = jQuery.deparam(window.location.search);
+  console.log("Welcome to the server ",param);
+  socket.emit('join',param,function(e){
+    if (e){
+      alert(e);
+      window.location.href ="/";
+    }else {
 
-  console.log("This is untoucable");
+    }
+  });
 });
 socket.on('newMessage',function (message){
   console.log('message',message);
   var li = jQuery('<li></li>');
-  li.text(`${message.from}: ${message.text}`);
+  li.text(`${message.from} ${message.createAt} : ${message.text} `);
   jQuery('#messages').append(li);
 });
 // socket.on('newEmail',function(email){
