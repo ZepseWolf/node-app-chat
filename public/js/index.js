@@ -22,7 +22,7 @@ jQuery('#message-form').on('submit',function(e){
   e.preventDefault();
 
   socket.emit('createMessage',{
-    form:'User',
+    from:'User',
     text: jQuery('[name=message]').val()
   },function(){
 
