@@ -4,17 +4,27 @@ socket.on('disconnect',function(){
   console.log('Server down');
 });
 socket.on('connect',function(){
-  console.log('Server conneted');
-  socket.emit('createMessage',{
-    From: 'andrew',
-    text: 'heyyyyy i sux'
-  });
-});
 
-socket.on('newEmail',function(email){
-  console.log('New email',email);
+  console.log("This is untoucable");
 });
-
 socket.on('newMessage',function (message){
   console.log('message',message);
+  var li = jQuery('<li></li>');
+  li.text(`${message.from}: ${message.text}`);
+  jQuery('#messages').append(li);
+});
+// socket.on('newEmail',function(email){
+//   console.log('New email',email);
+// });
+
+
+jQuery('#message-form').on('submit',function(e){
+  e.preventDefault();
+
+  socket.emit('createMessage',{
+    form:'User',
+    text: jQuery('[name=message]').val()
+  },function(){
+
+  });
 });
