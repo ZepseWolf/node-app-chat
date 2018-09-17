@@ -16,7 +16,7 @@ socket.on('connect',function(){
   });
 });
 socket.on('newMessage',function (message){
-  console.log('message',message);
+  //console.log('message',message);
   var li = jQuery('<li></li>');
   li.text(`${message.from} ${message.createAt} : ${message.text} `);
   jQuery('#messages').append(li);
@@ -33,6 +33,11 @@ socket.on('newLocationMessage',function(message){
   li.append(a);
   jQuery('#messages').append(li);
 });
+
+socket.on('updateUserList', function(user){
+  console.log('User list', user);
+});
+
 
 jQuery('#message-form').on('submit',function(e){
   e.preventDefault();
